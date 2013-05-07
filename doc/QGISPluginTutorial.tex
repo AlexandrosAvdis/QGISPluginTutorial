@@ -1,0 +1,175 @@
+\documentclass[11pt,a4paper,twoside,openany]{article}
+\usepackage{amsmath,amsbsy,a4wide,amssymb,amsthm}
+\usepackage{color,graphics}
+\usepackage{natbib}
+\usepackage{array}
+\usepackage{cancel}
+\usepackage{psfrag}
+\usepackage{times}
+\usepackage{lscape}
+\usepackage{rotating}
+\usepackage{longtable}	%for tables spanning multiple pages
+\usepackage{supertabular}
+\usepackage{multirow}
+\usepackage[toc,page]{appendix}
+\usepackage{thumbpdf}   %PDF specific
+\usepackage[pdftex,
+        colorlinks=true,
+        urlcolor=rltblue,       % \href{...}{...} external (URL)
+        filecolor=rltblack,     % \href{...} local file
+        linkcolor=rltblack,       %\ref{...} and \pageref{...}
+        citecolor=rltblack,
+        pdftitle={A tutorial on writing QGIS python plugins},
+        pdfauthor={AMCG},
+        pdfsubject={},
+        pdfkeywords={},
+        pdfpagemode=None,
+        bookmarksopen=true,
+        plainpages=false]{hyperref}
+\usepackage{color}
+\definecolor{rltblack}{rgb}{0,0,0}
+\definecolor{rltred}{rgb}{0.75,0,0}
+\definecolor{rltgreen}{rgb}{0,0.5,0}
+\definecolor{rltblue}{rgb}{0,0,1}
+\usepackage[]{caption}
+\renewcommand{\captionfont}{\linespread{1.5}\small\itshape}
+\renewcommand{\captionlabelfont}{\linespread{1.1}\small\itshape\bfseries}
+\setlength{\captionmargin}{20pt}
+\usepackage{pdfpages}
+\usepackage{subfig}
+\usepackage{listings}
+\lstset{basicstyle=\ttfamily\small,numbers=none,stepnumber=1,numberstyle=\tiny,commentstyle=\color{rltblue},keywordstyle=\color{rltred}}
+\usepackage{eso-pic}
+
+\def \ie{{\it\frenchspacing i.e.\ }}
+\def \eg{{\it\frenchspacing e.g.\ }}
+\def \cf{{\it\frenchspacing cf.\ }}
+\def \etc{{\it\frenchspacing etc.\ }}
+\def \viz{{\it\frenchspacing viz.\ }}
+\def \etal{{\it\frenchspacing et al.\ }}
+
+%% Header Style
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
+\renewcommand{\sectionmark}[1]{\markright{\footnotesize{\thesection.\ #1}}{}}
+\renewcommand{\leftmark}{QGIS python plugin tutorial.}
+\fancyhead[LE,RO]{\thepage}
+\fancyhead[RE]{\leftmark}
+\fancyhead[LO]{\rightmark}
+\fancyfoot[LE,RO]{\footnotesize{\href{http://amcg-www.ese.ic.ac.uk/index.php?title=Main_Page}{AMCG group}}}
+\cfoot{} %cancel out default printing of page number at bottom-centre of the page
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.0pt}
+\setlength{\headheight}{7mm}
+\setlength{\headwidth}{150mm}
+
+%Boxed align equations
+\newenvironment{boxalign}
+{\fbox{ \addtolength{\linewidth}{-2\fboxsep} \addtolength{\linewidth}{-2\fboxrule} \begin{minipage}{\linewidth} \begin{align} }
+{\end{align} \end{minipage} } }
+
+% generic partial derivative
+\newcommand{\pderiv}[2]{\ensuremath{\frac{\partial #1}{\partial #2}}}
+%spatial partial derivative
+\newcommand{\pdx}[2]{\pderiv{#1}{x_{#2}}}
+%temporal partial derivative
+\newcommand{\pdt}[1]{\pderiv{#1}{t}}
+%generic 2nd derivative
+\newcommand{\cpderiv}[3]{\ensuremath{\frac{\partial^2 #1}{\partial #2
+	\partial #3}}}
+%laplacian
+%\newcommand{\lapl}[2]{\ensuremath{\frac{\partial^2 #1}{{\partial x_{#2}}^2}}}
+\newcommand{\lapl}[2]{\cderiv{^2 #1} {x_{#2}} {x_{#2}} }
+%Bold-face-italic tensor  and vector notation
+\newcommand{\tnsr}[1]{\mbox{\overline{\overline{$#1$}}}}
+\newcommand{\vctr}[1]{\ensuremath{\overrightarrow{#1}}}
+%Sans-serif matrix notation
+\newcommand{\matrx}[1]{\ensuremath{\mathsf{#1}}}
+\newcommand{\vmatrx}[1]{\ensuremath{\underline{\mathsf{#1}}}}
+
+%Filtered notation: overbar
+\newcommand{\filt}[1]{\ensuremath{\overline{#1}}}
+%Single-variable Integrals
+\newcommand{\myint}[2]{\ensuremath{\int_{#1}{#2} \mbox{ {d}} {#1}}}
+\newcommand{\myintlu}[4]{\ensuremath{\int_{#1}^{#2}{#3} \mbox{ {d}} {#4}}}
+
+\begin{document}
+
+\baselineskip=18pt
+
+\begin{titlepage}
+\setlength{\hoffset}{0pt}
+\setlength{\voffset}{0pt}
+\setlength{\oddsidemargin}{-1in}
+\setlength{\topmargin}{-1.5in}
+\setlength{\textwidth}{\paperwidth}
+
+\begin{minipage}[t]{3.5in}
+\baselineskip=10pt
+\scalebox{0.5}{\includegraphics{LicenceIcon.png}}\\
+\end{minipage}\\[40mm]
+
+\begin{minipage}{0.95\textwidth}
+\begin{center}
+{\Large A tutorial on writing QGIS python plugins}\\[10pt]
+{\normalsize Applied Modelling and Computation Group (AMCG)}\\{\footnotesize contact Alexandros Avdis: \href{mailto:a.avdis@imperial.ac.uk}{\lstinline+a.avdis@imperial.ac.uk+}}
+\end{center}
+\end{minipage}
+\\[10mm]
+\begin{minipage}{0.1\paperwidth}
+\hfill
+\end{minipage}
+\begin{minipage}{0.8\paperwidth}
+ \begin{center}
+ \begin{minipage}[t]{3.2in}
+ \addcontentsline{toc}{section}{Summary}
+ \include{summary/summary}
+ \end{minipage}\hfill
+ \begin{minipage}[t]{3in}{\footnotesize{\tableofcontents}}\end{minipage}\\[10pt]
+ \end{center}
+\end{minipage}
+\AddToShipoutPicture*{%
+  \AtPageLowerLeft{%
+        \begin{minipage}{\paperwidth}
+          %\begin{figure}\scalebox{0.5}{\includegraphics{Logo_white.png}}\end{figure}
+          \hfill\scalebox{0.05}{\includegraphics{Logo_white.png}}\\[30pt]
+        \end{minipage} %
+    } %
+  }%
+\end{titlepage}
+\thispagestyle{empty}
+\begin{center}
+This document was compiled on \today\\[30pt]
+This work is licensed under a \href{http://creativecommons.org/licenses/by/3.0/deed.en_GB}{Creative Commons Attribution 3.0 Unported License}.\\[30pt]
+This work is also available through a GitHub repository: \url{https://github.com/AlexandrosAvdis/QGISPluginTutorial.git}\\Please report issues and contact author via mechanisms available therein.
+\vfill
+{\footnotesize
+Applied Modelling and Computation Group (AMCG)\\[10pt]
+\url{http://amcg-www.ese.ic.ac.uk/}\\
+%\href{mailto:fluidity@imperial.ac.uk}{\lstinline+fluidity@imperial.ac.uk+}\\
+Imperial College London}
+\end{center}
+\pagebreak
+
+\setlength{\textwidth}{390pt}
+\setlength{\textheight}{592pt}
+\setlength{\topmargin}{-0.5in}
+\setlength{\headsep}{10mm}
+\setlength{\textheight}{240mm}
+\setlength{\oddsidemargin}{4mm}
+\setlength{\evensidemargin}{-4.mm}
+\pagenumbering{arabic}
+
+\include{introduction/introduction}
+
+%\include{/}
+
+\begin{appendices}
+\include{licence/licence}
+\end{appendices}
+
+\addcontentsline{toc}{section}{References}
+\bibliographystyle{apalike}
+\bibliography{bibliography/bibliography.bib}
+\end{document}
