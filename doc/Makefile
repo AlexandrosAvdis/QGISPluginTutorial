@@ -18,3 +18,6 @@ $(PDF_DOCUMENT):$(ALL_TEX_FILES) $(ALL_BIB_FILES)
 clean:
 	@rm -f */*.aux *.aux *.log *.nav *.out *.snm *.toc *.pdf *.bbl *.blg
 	@echo "****************************Cleaning complete."
+
+view:
+	@evince $(PDF_DOCUMENT) &
