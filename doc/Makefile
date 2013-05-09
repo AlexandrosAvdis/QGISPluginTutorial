@@ -20,4 +20,4 @@ clean:
 	@echo "****************************Cleaning complete."
 
 view:
-	@evince $(PDF_DOCUMENT) &
+	evince $(PDF_DOCUMENT) &

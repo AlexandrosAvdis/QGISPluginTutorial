@@ -1,2 +1,62 @@
-\section{Plugin 1: ``Hello world''}
+\section{Plugin 1: ``Hello World''}
 \label{sect:plugin_1}
+\par %Overview and aim of this exersise
+The aim of this section is to delineate the major components of QGIS python plugins and show how these components interact. To that end the reader is guider through the creation of a very basic plugin that executes very simple python code: It prints the message "Hello world!" on the terminal QGIS was invoked from.
+%we here use terminals to output results: we avoid the need for extensive PyQt4 usage
+%Code already available in the repo but the real value is in doing things yourself.
+\par %First step, create some files
+The first step is to create some files. Carry out the following steps:
+\begin{enumerate}
+  \item Inside the \lstinline{QGIS_tutorial} directory create a directory named \lstinline{plugin_1}.
+  \item Inside directory \lstinline{plugin_1} create the following files
+  \begin{enumerate}
+    \item \lstinline{__init__.py}: Use the touch utility to create an empty file.
+    \item \lstinline{metadata.txt}: Use the touch utility to create an empty file.
+    \item \lstinline{plugin_1.py}: Use the touch utility to create an empty file.
+    \item \lstinline{icon.png}: Issue \lstinline{} to fetch a PNG file from our repository.
+  \end{enumerate}
+\end{enumerate}
+Next we populate the files, we start with \lstinline{__init__.py}. As mentioned in section \label{sect:introduction} QGIS plugins are implemented as python packages, so the \lstinline{__init__.py} file is the initialisation of the python package--class. Open the file with the editor of your choice and add the following content:
+\begin{lstlisting}
+'''
+A simple "Hello World" plugin.
+'''
+
+def name():
+    '''Function returning the plugin name.'''
+    return "plugin_1"
+
+def description():
+    '''Function returning a string describing the plugin.'''
+    return "My first QGIS python plugin!"
+
+def version():
+    '''Function returning the version of the plugin.'''
+    return "Version 0.1"
+
+def icon():
+    '''Function returning the filename of the plugin icon.'''
+    return "icon.png"
+
+def qgisMinimumVersion():
+    '''Function returning the minimum QGIS version that this plugin is operational in.'''
+    return "1.8"
+
+def author():
+    '''Function stating the author of the plugin.'''
+    return "AMCG"
+
+def email():
+    '''Function returning the contact e-mail for the plugin.'''
+    return "noMail"
+
+def classFactory(interface)
+    from plugin_1 import plugin_1
+    f = open('plugin_1.log',w)
+    f.write("Loading plugin_1 into QGIS.")
+    f.close()
+    #Create plugin_1 instance
+    plugin_1_instance = plugin_1(interface)
+    return plugin_1_instance
+\end{lstlisting}
+When the plugin is ``loaded'' into QGIS, the functions inside \lstinline{__init__.py} are called, and that allows QGIS to obtain information on the plugin as well as get an instance of the class encapsulating the plugin. Note that the names of the functions are set and cannot be arbitarily chosen, QGIS will attempt to call exactly these functions. Thus, the first $7$ fuctions now defined in \lstinline{__init__.py} are self-explanatory. Function \lstinline{classFactory} however, deserves special attention.
