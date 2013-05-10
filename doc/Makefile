@@ -10,7 +10,7 @@ default: $(PDF_DOCUMENT)
 $(PDF_DOCUMENT):$(ALL_TEX_FILES) $(ALL_BIB_FILES)
 	@echo "****************************Building $(PDF_DOCUMENT)..."
 	@pdflatex -shell-escape $(ROOT_TEX_FILE)
-	@bibtex $(DOCUMENT)
+#	@bibtex $(DOCUMENT)
 	@pdflatex -shell-escape $(ROOT_TEX_FILE)
 	@pdflatex -shell-escape $(ROOT_TEX_FILE)
 	@echo "****************************Building $(PDF_DOCUMENT) complete."
