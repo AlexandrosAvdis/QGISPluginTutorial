@@ -1,0 +1,14 @@
+; Mandatory metadata about the plugin.
+[general]
+name=plugin_1
+qgisMinimumVersion=1.8
+version=version 0.1
+description=A simple plugin showing the
+    basic methods behind QGIS python plugins
+category=Raster
+
+; Following fileds are optional
+homepage=http://www.
+tracker=http://bugs
+repository=http://www.
+icon=icon.png
