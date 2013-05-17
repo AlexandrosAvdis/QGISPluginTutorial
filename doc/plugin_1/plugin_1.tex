@@ -2,10 +2,10 @@
 \label{sect:plugin_1}
 \subsection{Aim}
 \label{ssect:plugin_1_aim}
-\par %Overview and aim of this exersise
-The aim of this section is to delineate the major components of QGIS python plugins and show how these components interact. To that end the reader is guider through the creation of a very basic plugin that executes very simple python code: It prints the message "Hello world!" on the terminal QGIS was invoked from.
+\par %Overview and aim of this exercise
+The aim of this section is to delineate the major components of QGIS python plugins and show how these components interact. To that end the reader is guider through the creation of a very basic plugin that executes very simple python code: It writes messages, including "Hello world!", in a file.
 %we here use terminals to output results: we avoid the need for extensive PyQt4 usage
-%Code already available in the repo but the real value is in doing things yourself.
+%Code already available in the repository but the real value is in doing things yourself.
 \subsection{Creating and running the plugin}
 \label{ssect:creating_plugin_1}
 \par %First step, create some files
@@ -17,27 +17,49 @@ The first step is to create some files. Carry out the following steps:
     \item \lstinline{__init__.py}: Use the touch utility to create an empty file.
     \item \lstinline{metadata.txt}: Use the touch utility to create an empty file.
     \item \lstinline{plugin_1.py}: Use the touch utility to create an empty file.
-    \item \lstinline{icon.png}: Issue \lstinline{} to fetch a PNG file from our repository.
+    \item \lstinline{icon.png}: Issue \lstinline{git command} to fetch a PNG file from our repository.
   \end{enumerate}
+  The files listed above are mandatory.
 \end{enumerate}
 Next we populate the files, we start with \lstinline{__init__.py}. As mentioned in section \label{sect:introduction} QGIS plugins are implemented as python packages, so the \lstinline{__init__.py} file is the initialisation of the python package--class. Open the file with the editor of your choice and add the following content:
 \lstinputlisting[language=Python]{../src/plugin_1/__init__.py}
-When the plugin is ``loaded'' into QGIS, the functions inside \lstinline{__init__.py} are called, and that allows QGIS to obtain information on the plugin as well as get an instance of the class encapsulating the plugin. Note that the names of the functions are set and cannot be arbitarily chosen, QGIS will attempt to call exactly these functions. Thus, the first $7$ fuctions now defined in \lstinline{__init__.py} are self-explanatory. Function \lstinline{classFactory} however, deserves special attention. Its definition shows that it requires a single argument, \lstinline{interface}. In turn, \lstinline{interface} must be an instance of a QGIS class, encapsulating the QGIS GUI; methods of this class allow the user to control buttons and menu-items of the QGIS window. Returning to the \lstinline{classFactory} method, we see that the class \lstinline{plugin_1} from file \lstinline{plugin_1.py} is imported. The following file I/O lines will allow us to show when each functions is executed later on. Finally an instance of the \lstinline{plugin_1} class is created and returned.
 \par%The python plugin code
 Next lets populate the \lstinline{plugin_1.py} file. Add the following content:
 \lstinputlisting[language=Python]{../src/plugin_1/plugin_1.py}
 The first three functions above are mandatory. Explain functionality
 \par%The plugin metadata file
 Add content to \lstinline{metadata.txt} file. Explain.
-\par%''install'' the plugin
-Create link to \lstinline{plugin_1} directory from \lstinline{/usr/share/qgis/python/plugins/}. explain and list standard places where plugins are expected to be stored
+\par%'install' the plugin
+Create link to \lstinline{plugin_1} directory from \lstinline{/usr/share/qgis/python/plugins/}. Explain and list standard places where plugins are expected to be stored
+%cd /usr/share/qgis/python/plugins/
 \begin{lstlisting}
-cd /usr/share/qgis/python/plugins/
 sudo ln -s /path/to/plugin_1 /usr/share/qgis/python/plugins/plugin_1
 \end{lstlisting}
+\par%'run' the plugin
+State how to load and run the plugin. Explain that nothing happens in the window, but messages are written to the log file.
+\begin{lstlisting}
+Loading plugin_1 into QGIS.
+Initialising plugin_1 instance.
+plugin_1 instance created, returning to QGIS.
+Changing QGIS GUI to reflect plugin addition.
+Hello World!
+Hello World!
+Resetting QGIS GUI to prior plugin-addition state. Bye World, see you soon!
+\end{lstlisting}
+
+\subsection{Understanding the basics of QGIS plugins}
+\label{ssect:understanding_plugin_basics}
+\par
+Overview?
+\par
+We now turn to a closer examination of the contents of the files we created in the previous section, starting with \lstinline{__init__.py}. When the plugin is ``loaded'' into QGIS the module encapsulating the pluging is loaded. As such, the functions inside \lstinline{__init__.py} are called. These methods allow QGIS to obtain information on the plugin as well as create an instance of the class encapsulating the plugin. Note that the names of the functions are set and cannot be arbitrarily chosen, QGIS will attempt to call exactly these functions. The first $7$ fuctions defined in \lstinline{__init__.py} are self-explanatory. Function \lstinline{classFactory} however, deserves special attention. Its definition shows that it requires a single argument, \lstinline{interface}. This must be an instance of the \lstinline{QgisInterface} class\footnote{Full documentation at \url{http://www.qgis.org/api/classQgisInterface.html}}, encapsulating the QGIS GUI; methods of this class allow the user to control the QGIS window. Returning to the \lstinline{classFactory} method, we see that the class \lstinline{plugin_1} from file \lstinline{plugin_1.py} is imported. The following file I/O lines will allow us to identify when this functions is executed when loading the plugin. Indeed the first line in the \lstinline{plugin_1.log} file is clearly created by method \lstinline{classFactory}. Next, an instance of the \lstinline{plugin_1} class is created--we will examine this procedure shorlty, but lets stay with \lstinline{classFactory} for now. Note that the \lstinline{plugin_1} module was imported in the first line of the \lstinline{classFactory} method. Next, another message is written to the log-file and the plugin-class instance is returned.
+\par%Overview of QGIS-plugin communication.
+\par
+Now lets look at file \lstinline{plugin_1.py}. The second line in \lstinline{plugin_1.log} is written from method \lstinline{__init__} in \lstinline{plugin_1} class. As mentioned above the \lstinline{classFactory} method creates an instance of the \lstinline{plugin} class, and then returns it to QGIS. Therefore the order of the first three messages in \lstinline{plugin_1.log} is as expected. Next, QGIS calls the \lstinline{initGui} method of the plugin class. Looking at the implementation of \lstinline{initGui} we see that a meessage is witten to the log-file, indeed appearing in the fourth line. The following lines in \lstinline{initGui} add a button to the toolbar and a menu entry to allow for the plugin to be ``run'' when the user clicks on those entities. Setting-up this functionality requires the user to create special objects that encapsulate a click-able entity on screen: The entity has a visual repesentation as a button so it must be drawn on screen and special loops must be put in place checking if the user has clicked on the button, and then emmit a signal indicating this action. Also, other loops must continualy check for the emmition of the aforementioned signal, and take action accordingly. Fortunatelly much of this is created and handled via the PyQt library.
 
 \subsection{Exersises}
-Examine QAction documentation
-Examine QIcon documentation
-Examine QObject documentation
-Examine addToolBarIcon, addPluginToMenu, and their remove couterparts
+Examine QAction documentation\\
+Examine QIcon documentation\\
+Examine QObject documentation\\
+Examine addToolBarIcon, addPluginToMenu, and their remove counterparts\\
+Explore the QGIS python interface at \url{http://www.qgis.org/api/index.html}
