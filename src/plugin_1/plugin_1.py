@@ -19,22 +19,21 @@ class plugin_1:
 
       def initGui(self):
           '''
-          Method setting up QGIS GUI.
+          Method setting up QGIS GUI(the main window).
           '''
           #Write to log-file
           f = open('plugin_1.log','a')
           f.write("Changing QGIS GUI to reflect plugin addition.\n")
           f.close()
-          #Create special flag
-          icon = PyQtGui.QIcon(":/plugins/plugin_1/icon.png")
-          self.action = PyQtGui.QAction(icon,"plugin 1, Hello World!", \
+          #Create a PyQt icon for plugin_1. Tie that icon to a PyQt action
+          plugin_1_icon = PyQtGui.QIcon(":/plugins/plugin_1/icon.png")
+          self.action = PyQtGui.QAction(plugin_1_icon,"plugin 1, Hello World!", \
                                         self.interface.mainWindow() \
                                        )
-          #Add a new entry to the menu and the icon to the toolbar,
-          # raise th flag constructed above when either is clicked.
+          #Add a new entry to the menu and the icon to the toolbar.
           self.interface.addToolBarIcon(self.action)
           self.interface.addPluginToMenu("Plugin_1", self.action)
-          #Connect the 'action' to a method in this class
+          #Connect the apppropriate signal from the action to a method in this class
           PyQtCore.QObject.connect(self.action, PyQtCore.SIGNAL("triggered()"), \
                                    self.sayHello \
                                   )
