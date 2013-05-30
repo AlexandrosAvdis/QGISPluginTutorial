@@ -32,11 +32,14 @@ def email():
     return "noMail"
 
 def classFactory(interface):
-    from plugin_1 import plugin_1
+    '''Function returning an instance of the class
+       encapsulating the plugin.'''
+    #Open log-file
     f = open('plugin_1.log','w')
     f.write("Loading plugin_1 into QGIS.\n")
     f.close()
     #Create plugin_1 instance
+    from plugin_1 import plugin_1
     plugin_1_instance = plugin_1(interface)
     f = open('plugin_1.log','a')
     f.write("plugin_1 instance created, returning to QGIS.\n")
