@@ -3,6 +3,7 @@ plugin_1: A simple "Hello World" plugin.
 '''
 import PyQt4.QtCore as PyQtCore
 import PyQt4.QtGui as PyQtGui
+import Qt_resources
 
 class plugin_1:
       '''

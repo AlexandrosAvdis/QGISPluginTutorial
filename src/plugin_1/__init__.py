@@ -25,9 +25,13 @@ def qgisMinimumVersion():
 
 def author():
     '''Function stating the author of the plugin.'''
-    return "AMCG"
+    return "Alexandros Avdis, Applied Modelling and Computation Group (AMCG)"
 
 def email():
+    '''Function returning the contact e-mail for the plugin.'''
+    return "a.avdis@imperial.ac.uk"
+
+def category():
     '''Function returning the contact e-mail for the plugin.'''
     return "noMail"
 
