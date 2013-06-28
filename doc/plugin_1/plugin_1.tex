@@ -32,7 +32,7 @@ Populate \lstinline{metadata.txt}. Add the following content:
 \par%The Qt resources file, also 'compile' it
 The last file we need to populate is \lstinline{Qt_resources.qrc}. Add the following content:
 \lstinputlisting{../src/plugin_1/Qt_resources.qrc}
-File \lstinline{Qt_resources.qrc} must be passed to the Qt recource--file--compiler as follows (expand):
+File \lstinline{Qt_resources.qrc} must be passed to the Qt recource--file--compiler as follows. For more infrmation on resource files see \url{http://pyqt.sourceforge.net/Docs/PyQt4/resources.html}(expand):
 \lstinline{pyrcc4 -o Qt_resources.py Qt_resources.qrc}
 \par%'install' the plugin
 So far we have created code in a directory of our choosing. However, for QGIS to run any plugin in a linux machine the direcory \lstinline{plugin_1} must be placed in any of the following locations:

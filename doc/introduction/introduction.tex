@@ -3,10 +3,20 @@
 
 \subsection{Prerequisites}
 \label{ssect:prerequisites}
-Things the reader should look into:\\
-http://www.riverbankcomputing.com/software/pyqt/intro \\
-http://pyqt.sourceforge.net/Docs/PyQt4/classes.html \\
-http://docs.python.org/2/howto/unicode.html
+This document is not aimed to be a thorough tutorial on python, Quantum GIS or PyQt alone. It will show the reader how to bring these ``elemenrs'' together. I appreciate that some of the readers may be begginners on any of these, and I have tryied to explain many basic concepts. However, the begginner will find that I usually encourage them to research and understand the problem, as well as just giving the code. In addition, there are many good tutorials on python QGIS and PyQt available on-line, so I whould be re-inveting the wheel. As such, the begginner is encouraged to look into the following:
+\begin{enumerate}
+  \item For begginners to PyQt:
+  \begin{enumerate}
+    \item \url{http://zetcode.com/tutorials/pyqt4/} contains an excellent PyQt tutorial.
+    \item Digea are the creators of Qt, their web-site is \url{}.
+    \item PyQt is a set of python bindings to Qt library. It was developed by River Bank Computing, \url{http://www.riverbankcomputing.com/software/pyqt/intro}.
+    \item An exellent reference to the PyQt classes can be found at \url{http://pyqt.sourceforge.net/Docs/PyQt4/classes.html}.
+  \end{enumerate}
+  \item List to be finished off...
+  \begin{enumerate}
+    \item \url{http://docs.python.org/2/howto/unicode.html}
+  \end{enumerate}
+\end{enumerate}
 
 \subsection{What are QGIS plugins?}
 \par
@@ -15,3 +25,8 @@ QGIS-plugins are implemented as python packages : Quick introduction of the stru
 QGIS-plugins also use a graphical interface framework: PyQt. Quick introduction.\\
 Sketch the various components of a QGIS-plugin: How QGIS, python-packages and PyQt are brought together.
 
+This is not a QGIS installation guide, nonetheless Ubuntu users should be able to add the necessary repository via:
+\begin{lstlisting}
+sudo apt-get install python-software-properties
+sudo add-apt-repository ppa:ubuntugis/ppa
+\end{lstlisting}
