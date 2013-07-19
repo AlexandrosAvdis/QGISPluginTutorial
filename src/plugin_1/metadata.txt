@@ -9,8 +9,8 @@ description=A simple 'Hello-world' plugin showing the
 category=Plugins
 
 ; Following fields are optional.
-author=Applied Modelling and Computaion Group (AMCG)
-homepage=https://github.com/AlexandrosAvdis/QGISPluginTutorial.git
+author=Alexandros Avdis, Applied Modelling and Computaion Group (AMCG)
+homepage=http://alexandrosavdis.github.io/QGISPluginTutorial
 tracker=https://github.com/AlexandrosAvdis/QGISPluginTutorial.git
 repository=https://github.com/AlexandrosAvdis/QGISPluginTutorial.git
 icon=icon.png
