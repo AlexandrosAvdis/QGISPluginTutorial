@@ -1,0 +1,15 @@
+; Mandatory metadata about the plugin.
+[general]
+name=plugin_2
+qgisMinimumVersion=1.8
+version=version 0.1
+description=A simple 'Hello-world' plugin displaying a
+            message in a Qt dialogue window.
+category=Plugins
+
+; Following fields are optional.
+author=Alexandros Avdis, Applied Modelling and Computaion Group (AMCG)
+homepage=http://alexandrosavdis.github.io/QGISPluginTutorial
+tracker=https://github.com/AlexandrosAvdis/QGISPluginTutorial.git
+repository=https://github.com/AlexandrosAvdis/QGISPluginTutorial.git
+icon=icon.png
