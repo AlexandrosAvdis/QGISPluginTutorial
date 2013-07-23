@@ -1,3 +1,52 @@
 \section{Plugin 2: ``Hello world'' revisited}
 \label{sect:plugin_2}
+\subsection{Aim}
+\label{ssect:plugin_2_aim}
+\par %Overview and aim of this exercise
+The aim of this section is to ...
+\subsection{Creating and running the plugin}
+\label{ssect:creating_plugin_1}
+\par %First step, create some files
+As with out previous plug-in we begin by creating the mandatory files. Carry out the following steps:
+\begin{enumerate}
+  \item Inside the \lstinline{QGIS_tutorial} directory create a directory named \lstinline{plugin_2}.
+  \item Inside directory \lstinline{plugin_2} create the following files:
+  \begin{enumerate}
+    \item \lstinline{icon.png}: Issue \lstinline{git command} to fetch a PNG file from our repository.
+    \item \lstinline{__init__.py}: Use the touch utility to create an empty file.
+    \item \lstinline{plugin_2.py}: Use the touch utility to create an empty file.
+    \item \lstinline{metadata.txt}: Use the touch utility to create an empty file.
+    \item \lstinline{Qt_resources.qrc}: Use the touch utility to create an empty file.
+  \end{enumerate}
+\end{enumerate}
+Next we populate the empty files. Open the \lstinline{__init__.py} file and add the following content:
+\lstinputlisting[language=Python]{../src/plugin_2/__init__.py}
+\par%The python plugin code
+Add the following content to \lstinline{plugin_2.py}:
+\lstinputlisting[language=Python]{../src/plugin_2/plugin_2.py}
+\par%The plugin metadata file
+Populate \lstinline{metadata.txt}. Add the following content:
+\lstinputlisting{../src/plugin_2/metadata.txt}
+\par%The Qt resources file, also 'compile' it
+Populate is \lstinline{Qt_resources.qrc}:
+\lstinputlisting{../src/plugin_2/Qt_resources.qrc}
+Remember, file \lstinline{Qt_resources.qrc} must be passed to the Qt recource--file--compiler:
+\lstinline{pyrcc4 -o Qt_resources.py Qt_resources.qrc}
+\par%'install' the plugin
+Finally, install the plugin:
+\begin{lstlisting}
+sudo ln -s /path/to/QGIS_tutorial/plugin_1 /usr/share/qgis/python/plugins/plugin_1
+\end{lstlisting}
+\par%'run' the plugin
+Run plugin.
+
+\subsection{Understanding the plugin}
+\label{ssect:understanding_plugin_2}
 revisit metadata.txt: introduce changelog field (multiline) as well as fields experimental, deprecated and tags (comma separated list).
+
+\subsection{Exercises}
+\label{ssect:plugin_1_exercises}
+\begin{enumerate}
+\item Exercise 1
+\item Exercise 2
+\end{enumerate}
