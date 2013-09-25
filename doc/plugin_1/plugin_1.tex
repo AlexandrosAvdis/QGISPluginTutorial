@@ -40,13 +40,16 @@ So far we have created code in a directory of our choosing. However, for QGIS to
   \item \lstinline{qgis_prefix/share/qgis/python/plugins/}
   \item \lstinline{\$HOME/.qgis/python/plugins/}
 \end{enumerate}
-where  \lstinline{qgis_prefix} is usually \lstinline{/usr} or \lstinline{/usr/local}. Note that copying to the first directory above requires super--user priviledges and has the effect of a ``system--wide'' installation, as the plugin will be available to anyone using QGIS on that computer. Copying to the second directory will affect an installation available only to the specific user. Locate your \lstinline{qgis_prefix/share/qgis/python/plugins/} direcory. Then, if you have super--user priviledges, create link to \lstinline{plugin_1} directory from \lstinline{/usr/share/qgis/python/plugins/}. Assuming \lstinline{qgis_prefix} is \lstinline{/usr} one has to do:
+where  \lstinline{qgis_prefix} is usually \lstinline{/usr} or \lstinline{/usr/local}. Note that copying to the first directory above requires super--user priviledges and has the effect of a ``system--wide'' installation, as the plugin will be available to anyone using QGIS on that computer. Copying to the second directory will affect an installation available only to the current user. Here we do the latter:
 \begin{lstlisting}
-sudo ln -s /path/to/QGIS_tutorial/plugin_1 /usr/share/qgis/python/plugins/plugin_1
+cd ~/.qgis/
+mkdir -p python/plugins
+cd python/plugins
+sudo ln -s /path/to/QGIS_tutorial/plugin_1 plugin_1
 \end{lstlisting}
-If the reader does not have super--user priviledges, a link from their home directory to the \lstinline{QGIS_tutorial/plugin_1} will work just as well. We avoid copying the code, instead a link was made so that whenever we modify the code we need not copy it again. Obviously this is usefull for development and training, but once a ``finished'' plugin has been developed a full copy must be placed in one of the aforementioned directories.
+We avoided copying the code, instead a link was made. Thus, whenever we modify the code we need not copy it again. Obviously this is usefull for development and training, but once a ``finished'' plugin has been developed a full copy must be placed in one of the aforementioned directories.
 \par%'run' the plugin
-We are now ready to load and run our plugin. Start a QGIS instance and click on ``Plugins'' on the menu bar, then select ``Manage Plugins'' as shown in figure \ref{fig:loading_QGIS_plugins}. The ``QGIS Plugin Manager'' window will appear, listing plugins ``installed'' in the system as shown in figure \ref{fig:loading_QGIS_plugins}. The tick-mark next to a plugin indicates that the plugin is ``loaded''. Clearly, we here make the distiction between installing and loading the plugin as the former being code available in an appropriate directory and the latter being an instance of the plugin class in QGIS.
+We are now ready to load and run our plugin, but first if you have closelly followed the instructions above your terminal should be in \lstinline{~/.qgis/python/plugins}. Go back to \lstinline{/path/to/QGIS_tutorial/plugin_1}. Start a QGIS instance from the command line. Once the QGIS main window is open, click on ``Plugins'' on the menu bar, then select ``Manage Plugins'' as shown in figure \ref{fig:loading_QGIS_plugins}. The ``QGIS Plugin Manager'' window will appear, listing plugins ``installed'' in the system as shown in figure \ref{fig:loading_QGIS_plugins}. The tick-mark next to a plugin indicates that the plugin is ``loaded''. Clearly, we here make the distiction between installing and loading the plugin as the former being code available in an appropriate directory and the latter being an instance of the plugin class in QGIS.
 \begin{figure}
  \centering
  \includegraphics[width=\textwidth]{figures/loading_QGIS_plugins.png}

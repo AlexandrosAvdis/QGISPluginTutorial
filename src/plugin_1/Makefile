@@ -3,7 +3,8 @@ RESOURCE_FILES = Qt_resources.py
 compile: $(RESOURCE_FILES)
 
 install:
-	sudo ln -fs $(PWD) /usr/share/qgis/python/plugins/plugin_1
+	cd ~/.qgis; mkdir -p python/plugins/
+	ln -fst ~/.qgis/python/plugins/ $(PWD)
 
 %.py : %.qrc
 	pyrcc4 -o $@  $<
